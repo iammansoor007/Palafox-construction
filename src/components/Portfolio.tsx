@@ -43,11 +43,8 @@ type ProjectItem = {
 };
 
 const Portfolio = () => {
-  const [activeTab, setActiveTab] = useState("All");
-  const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
-
   const { section, projects, modal, consultation } = completeData.portfolio as {
-    section: { badge: string; headline: string; description: string; viewScopeLabel: string };
+    section: { badge: string; headline: string; description: string; viewScopeLabel: string; allFilterLabel: string };
     modal: {
       scopeTitle: string;
       guaranteeTitle: string;
@@ -67,17 +64,20 @@ const Portfolio = () => {
     projects: ProjectItem[];
   };
 
+  const [activeTab, setActiveTab] = useState(section.allFilterLabel);
+  const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
+
   const categories = useMemo(() => {
     const cats = Array.from(new Set(projects.map((p) => p.category)));
-    return ["All", ...cats];
-  }, [projects]);
+    return [section.allFilterLabel, ...cats];
+  }, [projects, section.allFilterLabel]);
 
   const filteredProjects = useMemo(() => {
-    if (activeTab === "All") return projects;
+    if (activeTab === section.allFilterLabel) return projects;
     return projects.filter(
       (p) => p.category.toLowerCase() === activeTab.toLowerCase()
     );
-  }, [activeTab, projects]);
+  }, [activeTab, projects, section.allFilterLabel]);
 
   return (
     <section
@@ -152,7 +152,7 @@ const Portfolio = () => {
             {categories.map((cat) => {
               const isSelected = activeTab === cat;
               const count =
-                cat === "All"
+                cat === section.allFilterLabel
                   ? projects.length
                   : projects.filter((p) => p.category.toLowerCase() === cat.toLowerCase()).length;
 

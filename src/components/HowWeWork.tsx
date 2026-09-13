@@ -29,7 +29,7 @@ const iconMap: Record<string, React.ElementType> = {
   Community: MessageSquare,
 };
 
-const TrustBadge = ({ label, color }: { label: string; color?: string }) => {
+const TrustBadge = ({ label }: { label: string }) => {
   return (
     <div
       className="flex items-center gap-1.5 px-3 py-1 rounded-full backdrop-blur-sm"
@@ -41,10 +41,7 @@ const TrustBadge = ({ label, color }: { label: string; color?: string }) => {
       <div
         className="w-1.5 h-1.5 rounded-full"
         style={{
-          background:
-            color === "blue" || color === "primary"
-              ? "var(--primary-hex)"
-              : "var(--primary-hover-hex)",
+          background: "var(--primary-hex)",
         }}
       />
       <span
@@ -196,7 +193,7 @@ const FeatureCard = ({ feature, index }: { feature: any; index: number }) => {
             className="text-[11px] font-bold uppercase tracking-wider"
             style={{ color: "var(--primary-hex)" }}
           >
-            Standard Guarantee
+            {completeData.whyChooseUs.section.standardGuarantee}
           </span>
           <CheckCircle2
             className="w-4 h-4"
@@ -491,10 +488,8 @@ const HowWeWork = () => {
                   >
                     {(cta.trustBadges || []).map((b: any) => {
                       const label = typeof b === "string" ? b : b.label;
-                      const color =
-                        typeof b === "string" ? "blue" : b.color || "blue";
                       return (
-                        <TrustBadge key={label} label={label} color={color} />
+                        <TrustBadge key={label} label={label} />
                       );
                     })}
                   </motion.div>
@@ -514,7 +509,7 @@ const HowWeWork = () => {
                   >
                     <img
                       src={vectorimage2}
-                      alt={cta.imageAlt || "Palafox Construction"}
+                      alt={cta.imageAlt}
                       loading="eager"
                       className="w-full h-auto object-contain will-change-transform transform-gpu"
                       style={{
@@ -606,10 +601,8 @@ const HowWeWork = () => {
                 <div className="mt-6 flex flex-wrap justify-center gap-2">
                   {(cta.trustBadges || []).map((b: any) => {
                     const label = typeof b === "string" ? b : b.label;
-                    const color =
-                      typeof b === "string" ? "blue" : b.color || "blue";
                     return (
-                      <TrustBadge key={label} label={label} color={color} />
+                      <TrustBadge key={label} label={label} />
                     );
                   })}
                 </div>

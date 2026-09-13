@@ -144,7 +144,7 @@ const ServiceCard = memo(({
         </div>
 
         <div className="mt-auto flex items-center gap-2 text-sm font-black uppercase tracking-widest transition-colors duration-300" style={{ color: "var(--primary-hex)" }}>
-          <span>{completeData.services.cardCta || "Get Free Estimate"}</span>
+          <span>{completeData.services.cardCta}</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 shrink-0" />
         </div>
       </div>
@@ -366,7 +366,7 @@ const Services = () => {
                     className="text-[10px] font-black uppercase tracking-widest"
                     style={{ color: "var(--light-silver-color)" }}
                   >
-                    {cta.dividerText || "Or Call Direct"}
+                    {cta.dividerText}
                   </span>
                   <div className="flex-1 h-px" style={{ background: "rgba(var(--white-rgb), 0.15)" }} />
                 </div>

@@ -494,7 +494,7 @@ const Navbar = () => {
                   <div className="p-6 space-y-6">
                     <div>
                       <h3 className="text-lg font-bold text-card-foreground mb-4">
-                        {(completeData.navbar as any).servicesMenuTitle || "Our Services"}
+                        {(completeData.navbar as any).servicesMenuTitle}
                       </h3>
                       <div className="space-y-3">
                         {services.map((service) => {
@@ -535,7 +535,7 @@ const Navbar = () => {
 
                     <div>
                       <h3 className="text-lg font-bold text-card-foreground mb-4">
-                        {(completeData.navbar as any).quickLinksTitle || "Quick Links"}
+                        {(completeData.navbar as any).quickLinksTitle}
                       </h3>
                       <div className="space-y-2">
                         {companyLinks.map((link) => {

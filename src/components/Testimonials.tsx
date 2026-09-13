@@ -109,7 +109,7 @@ const VideoModal = ({
           <iframe
             className="w-full h-full"
             src={`https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0&showinfo=0`}
-            title={title || "YouTube video player"}
+            title={title || completeData.testimonials.stats.videoSection.videoPlayerTitle}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -386,10 +386,10 @@ const Testimonials = () => {
             <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-6">
               <div className="w-4 md:w-6 h-px bg-gradient-to-r from-primary to-primary/60" />
               <span className="text-[10px] md:text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground">
-                {stats.videoSection?.badge || "Video Testimonials"}
+                {stats.videoSection.badge}
               </span>
               <span className="text-[10px] md:text-xs text-primary ml-auto">
-                {stats.videoSection?.reviewCountText || `${stats.totalVideos} reviews on Google`}
+                {stats.videoSection.reviewCountText}
               </span>
             </div>
 
@@ -405,13 +405,13 @@ const Testimonials = () => {
 
             <div className="text-center mt-4 md:mt-6">
               <a
-                href={stats.videoSection?.googleReviewsLink || "https://maps.google.com/?q=Palafox+Construction+Dallas+TX"}
+                href={stats.videoSection.googleReviewsLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-xs md:text-sm text-primary hover:text-primary/80 transition-colors"
               >
                 <Icons.Google />
-                {stats.videoSection?.googleReviewsButtonText || `Read all ${stats.totalVideos} reviews on Google`}
+                {stats.videoSection.googleReviewsButtonText}
               </a>
             </div>
           </div>
@@ -435,8 +435,8 @@ const Testimonials = () => {
       <VideoModal
         isOpen={showVideoModal}
         onClose={() => setShowVideoModal(false)}
-        videoId={selectedVideo || ""}
-        title={selectedVideoTitle || ""}
+        videoId={selectedVideo}
+        title={selectedVideoTitle}
       />
     </>
   );

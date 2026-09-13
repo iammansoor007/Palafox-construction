@@ -752,9 +752,9 @@ Name: ${formData.name}
 Email: ${formData.email}
 Phone: ${formData.phone}
 Company: ${formData.company}
-Project Type: ${projectTypes.find((t: any) => t.value === formData.projectType)?.label || "Not specified"}
-Timeline: ${timelines.find((t: any) => t.value === formData.timeline)?.label || "Not specified"}
-Selected Services: ${serviceNames || "None selected"}
+Project Type: ${projectTypes.find((t: any) => t.value === formData.projectType)?.label || quoteData.notSpecified}
+Timeline: ${timelines.find((t: any) => t.value === formData.timeline)?.label || quoteData.notSpecified}
+Selected Services: ${serviceNames || quoteData.noneSelected}
 
 📝 MESSAGE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -975,7 +975,7 @@ Locally Owned & Operated
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                         <HolographicInput
                           icon={Icons.User}
-                          label={fields?.nameLabel || "Full name"}
+                          label={fields.nameLabel}
                           name="name"
                           value={formData.name}
                           onChange={handleInputChange}
@@ -984,7 +984,7 @@ Locally Owned & Operated
                         <HolographicInput
                           icon={Icons.Mail}
                           type="email"
-                          label={fields?.emailLabel || "Email address"}
+                          label={fields.emailLabel}
                           name="email"
                           value={formData.email}
                           onChange={handleInputChange}
@@ -996,14 +996,14 @@ Locally Owned & Operated
                         <HolographicInput
                           icon={Icons.Phone}
                           type="tel"
-                          label={fields?.phoneLabel || "Phone number"}
+                          label={fields.phoneLabel}
                           name="phone"
                           value={formData.phone}
                           onChange={handleInputChange}
                         />
                         <HolographicInput
                           icon={Icons.Building}
-                          label={fields?.companyLabel || "Company / Organization"}
+                          label={fields.companyLabel}
                           name="company"
                           value={formData.company}
                           onChange={handleInputChange}
@@ -1023,7 +1023,7 @@ Locally Owned & Operated
                     >
                       <div>
                         <label className="block text-[10px] sm:text-xs font-mono tracking-[0.2em] uppercase text-muted-foreground mb-4 sm:mb-6">
-                          {fields?.servicesLabel || "Select Your Services"}
+                          {fields.servicesLabel}
                         </label>
                         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                           {services.map((service: any) => (
@@ -1043,7 +1043,7 @@ Locally Owned & Operated
                         <HolographicInput
                           icon={Icons.Building}
                           type="select"
-                          label={fields?.classificationLabel || "Project classification"}
+                          label={fields.classificationLabel}
                           name="projectType"
                           options={projectTypes}
                           value={formData.projectType}
@@ -1052,7 +1052,7 @@ Locally Owned & Operated
                         <HolographicInput
                           icon={Icons.Calendar}
                           type="select"
-                          label={fields?.timelineLabel || "Timeline horizon"}
+                          label={fields.timelineLabel}
                           name="timeline"
                           options={timelines}
                           value={formData.timeline}
@@ -1073,7 +1073,7 @@ Locally Owned & Operated
                     >
                       <QuantumTextarea
                         icon={Icons.Mail}
-                        label={fields?.messageLabel || "Describe your project vision, requirements, and challenges"}
+                        label={fields.messageLabel}
                         name="message"
                         value={formData.message}
                         onChange={handleInputChange}
@@ -1089,12 +1089,12 @@ Locally Owned & Operated
                         <div className="relative z-10">
                           <h4 className="text-[10px] sm:text-xs font-mono tracking-[0.2em] uppercase text-primary mb-3 sm:mb-4 flex items-center gap-2">
                             <Icons.Sparkle />
-                            {summary?.title || "TRANSMISSION SUMMARY"}
+                            {summary.title}
                           </h4>
                           <div className="grid grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm">
                             <div>
                               <p className="text-[8px] sm:text-[10px] uppercase tracking-wider text-muted-foreground mb-1">
-                                {summary?.servicesLabel || "Services"}
+                                {summary.servicesLabel}
                               </p>
                               <p className="font-medium text-foreground text-xs sm:text-sm">
                                 {selectedServices.length} of {services.length}
@@ -1102,7 +1102,7 @@ Locally Owned & Operated
                             </div>
                             <div>
                               <p className="text-[8px] sm:text-[10px] uppercase tracking-wider text-muted-foreground mb-1">
-                                {summary?.classificationLabel || "Classification"}
+                                {summary.classificationLabel}
                               </p>
                               <p className="font-medium text-foreground text-xs sm:text-sm truncate">
                                 {formData.projectType
@@ -1115,7 +1115,7 @@ Locally Owned & Operated
                             </div>
                             <div>
                               <p className="text-[8px] sm:text-[10px] uppercase tracking-wider text-muted-foreground mb-1">
-                                {summary?.timelineLabel || "Timeline"}
+                                {summary.timelineLabel}
                               </p>
                               <p className="font-medium text-foreground text-xs sm:text-sm truncate">
                                 {formData.timeline
@@ -1127,10 +1127,10 @@ Locally Owned & Operated
                             </div>
                             <div>
                               <p className="text-[8px] sm:text-[10px] uppercase tracking-wider text-muted-foreground mb-1">
-                                {summary?.responseLabel || "Response"}
+                                {summary.responseLabel}
                               </p>
                               <p className="font-medium text-primary text-xs sm:text-sm">
-                                {summary?.responseTime || "4-8 hours"}
+                                {summary.responseTime}
                               </p>
                             </div>
                           </div>
@@ -1156,7 +1156,7 @@ Locally Owned & Operated
                     disabled={formStep === 1}
                   >
                     <span className="flex items-center gap-1 sm:gap-2">
-                      ← <span className="hidden xs:inline">{buttons?.previous || "Previous"}</span>
+                      ← <span className="hidden xs:inline">{buttons.previous}</span>
                     </span>
                   </motion.button>
 
@@ -1169,7 +1169,7 @@ Locally Owned & Operated
                       whileTap={{ scale: 0.98 }}
                     >
                       <span className="relative z-10 flex items-center gap-1 sm:gap-2">
-                        {buttons?.continue || "Continue"}
+                        {buttons.continue}
                         <Icons.ArrowRight />
                       </span>
                       <motion.div
@@ -1200,15 +1200,15 @@ Locally Owned & Operated
                               className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full"
                             />
                             <span className="hidden xs:inline">
-                              {buttons?.submitting || "Transmitting..."}
+                              {buttons?.submitting}
                             </span>
                           </>
                         ) : (
                           <>
                             <span className="hidden xs:inline">
-                              {buttons?.submitIdle || "Get Free Quote"}
+                              {buttons?.submitIdle}
                             </span>
-                            <span className="xs:hidden">{buttons?.submitMobile || "Send"}</span>
+                            <span className="xs:hidden">{buttons?.submitMobile}</span>
                             <Icons.Send />
                           </>
                         )}
@@ -1239,9 +1239,9 @@ Locally Owned & Operated
                   </div>
                   <span className="text-[10px] sm:text-xs text-muted-foreground">
                     <span className="font-semibold text-foreground">
-                      {consultationStat?.number || "500+"}
+                      {consultationStat?.number}
                     </span>{" "}
-                    {consultationStat?.label || "consultations"}
+                    {consultationStat?.label}
                   </span>
                 </div>
                 <div className="hidden xs:block w-px h-4 sm:h-6 bg-border" />

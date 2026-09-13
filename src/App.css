@@ -19,11 +19,11 @@
 }
 
 .logo:hover {
-  filter: drop-shadow(0 0 2em #C30505aa);
+  filter: drop-shadow(0 0 2em rgba(var(--primary-rgb), 0.6));
 }
 
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #C30505aa);
+  filter: drop-shadow(0 0 2em rgba(var(--primary-rgb), 0.6));
 }
 
 @keyframes logo-spin {
@@ -47,7 +47,7 @@
 }
 
 .read-the-docs {
-  color: #888;
+  color: var(--silver-color);
 }
 
 @media (min-width: 480px) and (max-width: 1000px) {

@@ -38,7 +38,7 @@ const Hero = () => {
   } = completeData.hero;
 
   const [activeDivision, setActiveDivision] = useState<string>(
-    estimateCard?.divisions?.[0]?.key || "roofing"
+    estimateCard.divisions[0].key
   );
   const [formData, setFormData] = useState({
     name: "",

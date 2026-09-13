@@ -448,7 +448,7 @@ const SearchBar = ({ onSearch }: { onSearch: (query: string) => void }) => {
         <input
           ref={inputRef}
           type="text"
-          placeholder={(completeData.faq as any).searchPlaceholder || "Search questions..."}
+          placeholder={(completeData.faq as any).searchPlaceholder}
           onChange={(e) => onSearch(e.target.value)}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
@@ -529,7 +529,7 @@ const KnowledgeCard = () => {
                 className="inline-block mb-6"
               >
                 <span className="px-4 py-2 text-sm font-bold bg-background/10 border border-white/20 rounded-lg text-white backdrop-blur-sm">
-                  {(knowledgeCard as any).badge || "STILL HAVE QUESTIONS?"}
+                  {knowledgeCard.badge}
                 </span>
               </motion.div>
 
@@ -588,11 +588,7 @@ const KnowledgeCard = () => {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="mt-8 flex gap-4"
               >
-                {((knowledgeCard as any).trustBadges || [
-                  { label: "Quick Response", color: "green" },
-                  { label: "Expert Support", color: "blue" },
-                  { label: "24/7 Available", color: "yellow" }
-                ]).map((b: any) => (
+                {(knowledgeCard.trustBadges || []).map((b: any) => (
                   <TrustBadge key={b.label} label={b.label} color={b.color} />
                 ))}
               </motion.div>
@@ -608,7 +604,7 @@ const KnowledgeCard = () => {
               >
                 <img
                   src={faqvector}
-                  alt="FAQ Support"
+                  alt={knowledgeCard.badge}
                   loading="eager"
                   className="w-full h-auto object-contain will-change-transform transform-gpu"
                   style={{
@@ -629,7 +625,7 @@ const KnowledgeCard = () => {
               className="inline-block mb-4"
             >
               <span className="px-3 py-1.5 text-xs font-semibold bg-background/20 border border-white/30 rounded-full text-white/90 backdrop-blur-sm">
-                {(knowledgeCard as any).badge || "STILL HAVE QUESTIONS?"}
+                {knowledgeCard.badge}
               </span>
             </motion.div>
 
@@ -682,11 +678,7 @@ const KnowledgeCard = () => {
 
             {/* Trust Badges - Mobile */}
             <div className="mt-6 flex flex-wrap justify-center gap-2">
-              {((knowledgeCard as any).trustBadges || [
-                { label: "Quick Response", color: "green" },
-                { label: "Expert Support", color: "blue" },
-                { label: "24/7 Available", color: "yellow" }
-              ]).map((b: any) => (
+              {(knowledgeCard.trustBadges || []).map((b: any) => (
                 <TrustBadge key={b.label} label={b.label} color={b.color} />
               ))}
             </div>
@@ -816,7 +808,7 @@ const FAQ = () => {
                 <Icons.Document />
               </div>
               <p className="text-muted-foreground text-base">
-                {(completeData.faq as any).noResultsText || "No questions found matching your criteria."}
+                {(completeData.faq as any).noResultsText}
               </p>
               <button
                 onClick={() => {
@@ -825,7 +817,7 @@ const FAQ = () => {
                 }}
                 className="mt-4 text-sm text-primary hover:text-primary/80 underline underline-offset-4 cursor-pointer"
               >
-                {(completeData.faq as any).clearFiltersText || "Clear filters"}
+                {(completeData.faq as any).clearFiltersText}
               </button>
             </motion.div>
           )}

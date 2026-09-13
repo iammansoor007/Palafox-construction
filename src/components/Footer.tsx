@@ -530,7 +530,7 @@ const Footer = () => {
                 title="Back to Top"
               >
                 <span className="text-[11px] font-bold uppercase tracking-wider">
-                  {bottom.backToTop || "Top"}
+                  {bottom.backToTop}
                 </span>
                 <ChevronUp className="w-3.5 h-3.5" style={{ color: "var(--primary-hex)" }} />
               </button>
