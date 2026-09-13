@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import {
   motion,
   AnimatePresence,
+  useInView,
 } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
