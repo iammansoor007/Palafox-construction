@@ -22,7 +22,7 @@ import {
   FaInstagram,
   FaLinkedinIn,
 } from "react-icons/fa";
-import logo from "../assets/logoreal.webp";
+import logo from "../assets/newlogo.png";
 import completeData from "../src/data/completeData.json";
 
 const iconMap: Record<string, React.ElementType> = {
