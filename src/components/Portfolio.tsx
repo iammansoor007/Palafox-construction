@@ -88,12 +88,12 @@ const Portfolio = () => {
       {/* ── Ambient Background Lighting ── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
-          className="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none"
-          style={{ background: "rgba(var(--primary-rgb), 0.06)" }}
+          className="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle, rgba(var(--primary-rgb), 0.06) 0%, transparent 70%)" }}
         />
         <div
-          className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full blur-[100px] pointer-events-none"
-          style={{ background: "rgba(var(--primary-hover-rgb), 0.05)" }}
+          className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle, rgba(var(--primary-hover-rgb), 0.05) 0%, transparent 70%)" }}
         />
       </div>
 
@@ -223,6 +223,7 @@ const Portfolio = () => {
                       src={resolvedImage}
                       alt={project.title}
                       loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
                     />
 

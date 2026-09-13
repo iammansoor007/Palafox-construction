@@ -100,6 +100,8 @@ const CeoPortrait = () => {
           <img
             src={ownerImg}
             alt={ceoData.alt}
+            loading="lazy"
+            decoding="async"
             className="w-full h-[500px] md:h-[600px] object-cover"
           />
 
@@ -195,7 +197,7 @@ const Leadership = () => {
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top 85%",
-            toggleActions: "play none none reverse",
+            once: true,
           },
         },
       );

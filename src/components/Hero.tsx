@@ -75,6 +75,7 @@ const Hero = () => {
           className="w-full h-full object-cover object-center transform scale-105 transition-transform duration-1000"
           style={{ opacity: 0.38 }}
           loading="eager"
+          decoding="async"
         />
 
         {/* Deep architectural dark overlays ensuring 100% crisp legibility */}
@@ -98,12 +99,12 @@ const Hero = () => {
 
         {/* Ambient Brand Glow */}
         <div
-          className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] rounded-full blur-[130px] pointer-events-none"
-          style={{ background: "rgba(var(--primary-rgb), 0.22)" }}
+          className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle, rgba(var(--primary-rgb), 0.22) 0%, transparent 70%)" }}
         />
         <div
-          className="absolute bottom-10 right-10 w-[450px] h-[450px] rounded-full blur-[140px] pointer-events-none"
-          style={{ background: "rgba(var(--primary-hover-rgb), 0.25)" }}
+          className="absolute bottom-10 right-10 w-[450px] h-[450px] rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle, rgba(var(--primary-hover-rgb), 0.25) 0%, transparent 70%)" }}
         />
 
         {/* Bottom seamless transition fade into page background */}

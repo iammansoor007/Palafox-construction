@@ -858,7 +858,7 @@ Locally Owned & Operated
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top 85%",
-            toggleActions: "play none none reverse",
+            once: true,
           },
         },
       );

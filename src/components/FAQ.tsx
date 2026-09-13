@@ -605,7 +605,8 @@ const KnowledgeCard = () => {
                 <img
                   src={faqvector}
                   alt={knowledgeCard.badge}
-                  loading="eager"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-auto object-contain will-change-transform transform-gpu"
                   style={{
                     filter: "drop-shadow(0 20px 40px rgba(var(--navy-rgb), 0.35))",
@@ -746,7 +747,7 @@ const FAQ = () => {
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top 85%",
-            toggleActions: "play none none reverse"
+            once: true
           }
         }
       );

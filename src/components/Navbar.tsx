@@ -198,7 +198,8 @@ const Navbar = () => {
               <div className="absolute left-0 top-1/2 -translate-y-[30%] h-20 w-32 sm:h-24 sm:w-40 lg:h-32 lg:w-46 flex items-center justify-center z-50">
                 <img
                   src={logo}
-                  alt="Palafox Construction Logo"
+                  alt={(completeData.navbar as any).logoAlt}
+                  decoding="async"
                   className="h-full w-full object-contain p-1 will-change-transform"
                   style={{ filter: "drop-shadow(0 8px 16px rgba(var(--black-rgb), 0.6))" }}
                 />
@@ -474,7 +475,8 @@ const Navbar = () => {
                       <div className="h-12 w-36 rounded-xl flex items-center justify-center overflow-hidden">
                         <img
                           src={logo2nd}
-                          alt="Palafox Construction Logo"
+                          alt={(completeData.navbar as any).logoAlt}
+                          decoding="async"
                           className="h-full w-full object-contain"
                         />
                       </div>

@@ -510,7 +510,8 @@ const HowWeWork = () => {
                     <img
                       src={vectorimage2}
                       alt={cta.imageAlt}
-                      loading="eager"
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-auto object-contain will-change-transform transform-gpu"
                       style={{
                         filter: "drop-shadow(0 20px 40px rgba(var(--navy-rgb), 0.35))",

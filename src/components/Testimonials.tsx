@@ -292,7 +292,7 @@ const Testimonials = () => {
         { y: 20, opacity: 0 },
         {
           y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power2.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 85%", toggleActions: "play none none reverse" },
+          scrollTrigger: { trigger: sectionRef.current, start: "top 85%", once: true },
         }
       );
     }, sectionRef);
