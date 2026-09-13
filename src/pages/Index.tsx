@@ -4,7 +4,6 @@ import Hero from "@/components/Hero";
 
 // ─── Lazy-loaded sections (each gets its own Suspense boundary
 //     so they appear independently as they load, not all-or-nothing) ───
-const RoofingExperts = lazy(() => import("@/components/RoofingExperts"));
 const Services       = lazy(() => import("@/components/Services"));
 const TeamValues     = lazy(() => import("@/components/TeamValues"));
 const Portfolio      = lazy(() => import("@/components/Portfolio"));
@@ -57,9 +56,6 @@ const Index = () => (
       <section id="hero-section">
         <Hero />
       </section>
-
-      {/* RoofingExperts section removed per user request */}
-
 
       <LazySection id="services" className="bg-background">
         <Services />

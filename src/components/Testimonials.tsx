@@ -1,11 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import {
   motion,
-  useScroll,
-  useTransform,
-  useSpring,
-  useInView,
-  useMotionValue,
   AnimatePresence,
 } from "framer-motion";
 import gsap from "gsap";
@@ -177,58 +172,30 @@ const TestimonialCard = ({
   testimonial: any; isActive?: boolean; onPlayVideo: (videoId: string, title: string) => void;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const cardRef = useRef(null);
-
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const springX = useSpring(x, { stiffness: 100, damping: 20 });
-  const springY = useSpring(y, { stiffness: 100, damping: 20 });
-  const rotateX = useTransform(springY, [-0.2, 0.2], [1, -1]);
-  const rotateY = useTransform(springX, [-0.2, 0.2], [-1, 1]);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (typeof window !== "undefined" && window.innerWidth < 768) return;
-    if (!cardRef.current) return;
-    const rect = (cardRef.current as HTMLElement).getBoundingClientRect();
-    x.set(((e.clientX - rect.left) / rect.width - 0.5) * 0.05);
-    y.set(((e.clientY - rect.top) / rect.height - 0.5) * 0.05);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    x.set(0);
-    y.set(0);
-  };
 
   return (
-    <motion.div
-      ref={cardRef}
+    <div
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={handleMouseLeave}
-      onMouseMove={handleMouseMove}
-      style={{
-        rotateX: typeof window !== "undefined" && window.innerWidth >= 768 ? rotateX : 0,
-        rotateY: typeof window !== "undefined" && window.innerWidth >= 768 ? rotateY : 0,
-        transformPerspective: 1000,
-      }}
-      className="relative w-full mx-auto"
+      onMouseLeave={() => setIsHovered(false)}
+      className="relative w-full mx-auto transition-transform duration-300 hover:-translate-y-1 transform-gpu"
     >
       <div
         className={`
-          relative bg-white rounded-none p-8 md:p-12
-          border-2 transition-all duration-500
+          relative rounded-none p-8 md:p-12
+          border-2 transition-all duration-300
           min-h-[380px] md:min-h-[420px]
           flex flex-col overflow-hidden
           ${isActive
             ? "border-primary shadow-[0_30px_60px_-15px_rgba(var(--primary-rgb),0.3)] z-20 scale-105"
-            : "border-white/10 shadow-lg opacity-60 grayscale-[50%] hover:grayscale-0 hover:opacity-100"
+            : "border-border shadow-lg opacity-60 grayscale-[50%] hover:grayscale-0 hover:opacity-100"
           }
         `}
+        style={{ background: "var(--card-bg)" }}
       >
         {/* Subtle Industrial Texture */}
         <div className="absolute inset-0 opacity-5 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/stucco.png')] mix-blend-overlay" />
         {/* Dynamic Background Gradient */}
-        <div className={`absolute inset-0 bg-gradient-to-br from-primary/[0.03] to-transparent transition-opacity duration-500 ${isHovered ? "opacity-100" : "opacity-0"}`} />
+        <div className={`absolute inset-0 bg-gradient-to-br from-primary/[0.03] to-transparent transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-0"}`} />
 
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
@@ -279,7 +246,7 @@ const TestimonialCard = ({
         <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-primary/20" />
         <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-primary/20" />
       </div>
-    </motion.div>
+    </div>
   );
 };
 

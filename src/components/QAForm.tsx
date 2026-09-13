@@ -891,28 +891,7 @@ Locally Owned & Operated
 
 
 
-      <div className="absolute inset-0 pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-0.5 h-0.5 bg-primary/20 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -40, 0, 40, 0],
-              opacity: [0, 0.2, 0],
-            }}
-            transition={{
-              duration: 8 + Math.random() * 6,
-              repeat: Infinity,
-              delay: Math.random() * 4,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </div>
+
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-30">
         <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16 md:mb-20 quote-cinematic">

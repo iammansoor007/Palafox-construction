@@ -73,34 +73,6 @@ const Icons = {
   ),
 };
 
-const ParallaxLayer = ({
-  children,
-  speed = 0.1,
-  className = "",
-}: {
-  children: React.ReactNode;
-  speed?: number;
-  className?: string;
-}) => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [0, speed * 50]);
-
-  return (
-    <motion.div
-      ref={ref}
-      style={{ y }}
-      className={`absolute inset-0 will-change-transform translate-z-0 ${className}`}
-    >
-      {children}
-    </motion.div>
-  );
-};
-
 const CeoPortrait = () => {
   const [isHovered, setIsHovered] = useState(false);
   const ref = useRef(null);
@@ -121,7 +93,10 @@ const CeoPortrait = () => {
       <div className="relative">
         <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-primary/20 to-primary/20 rounded-3xl blur-lg group-hover:blur-xl transition-all duration-700" />
 
-        <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-gray-300/50">
+        <div
+          className="relative rounded-2xl overflow-hidden shadow-2xl"
+          style={{ boxShadow: "0 25px 50px -12px rgba(var(--black-rgb), 0.15)" }}
+        >
           <img
             src={ownerImg}
             alt={ceoData.alt}

@@ -177,7 +177,7 @@ const Portfolio = () => {
                     className="text-[10px] px-1.5 py-0.5 rounded-full font-black"
                     style={{
                       background: isSelected
-                        ? "rgba(255, 255, 255, 0.25)"
+                        ? "rgba(var(--white-rgb), 0.25)"
                         : "rgba(var(--primary-rgb), 0.1)",
                       color: isSelected ? "var(--white-color)" : "var(--primary-hex)",
                     }}
@@ -214,11 +214,11 @@ const Portfolio = () => {
                   style={{
                     background: "var(--card-bg)",
                     borderColor: "var(--border-color)",
-                    boxShadow: "0 10px 30px rgba(5, 5, 5, 0.04)",
+                    boxShadow: "0 10px 30px rgba(var(--black-rgb), 0.04)",
                   }}
                 >
                   {/* Image Container */}
-                  <div className="relative w-full h-56 sm:h-64 overflow-hidden bg-slate-100">
+                  <div className="relative w-full h-56 sm:h-64 overflow-hidden" style={{ background: "var(--dark-bg)" }}>
                     <img
                       src={resolvedImage}
                       alt={project.title}
@@ -231,7 +231,7 @@ const Portfolio = () => {
                       className="absolute inset-0 pointer-events-none"
                       style={{
                         background:
-                          "linear-gradient(to top, rgba(5,5,5,0.7) 0%, transparent 60%)",
+                          "linear-gradient(to top, rgba(var(--black-rgb), 0.7) 0%, transparent 60%)",
                       }}
                     />
 
@@ -240,9 +240,9 @@ const Portfolio = () => {
                       <span
                         className="px-3.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider backdrop-blur-md border shadow-md"
                         style={{
-                          background: "rgba(10, 26, 36, 0.85)",
+                          background: "rgba(var(--navy-rgb), 0.85)",
                           color: "var(--white-color)",
-                          borderColor: "rgba(255, 255, 255, 0.2)",
+                          borderColor: "rgba(var(--white-rgb), 0.2)",
                         }}
                       >
                         {project.category}
@@ -353,7 +353,7 @@ const Portfolio = () => {
             className="absolute inset-0 opacity-[0.06] pointer-events-none"
             style={{
               backgroundImage:
-                "linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)",
+                "linear-gradient(rgba(var(--white-rgb), 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(var(--white-rgb), 0.2) 1px, transparent 1px)",
               backgroundSize: "32px 32px",
             }}
           />
@@ -363,7 +363,7 @@ const Portfolio = () => {
               <div
                 className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider"
                 style={{
-                  background: "rgba(255, 255, 255, 0.12)",
+                  background: "rgba(var(--white-rgb), 0.12)",
                   color: "var(--white-color)",
                 }}
               >
@@ -401,7 +401,7 @@ const Portfolio = () => {
                 href={consultation.phoneLink}
                 className="w-full sm:w-auto px-7 py-4 rounded-xl font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 border transition-all duration-300 hover:bg-white/10"
                 style={{
-                  borderColor: "rgba(255, 255, 255, 0.25)",
+                  borderColor: "rgba(var(--white-rgb), 0.25)",
                   color: "var(--white-color)",
                 }}
               >
@@ -448,7 +448,7 @@ const Portfolio = () => {
               </button>
 
               {/* Modal Image */}
-              <div className="relative w-full h-64 sm:h-80 bg-slate-900">
+              <div className="relative w-full h-64 sm:h-80" style={{ background: "var(--navy-color)" }}>
                 <img
                   src={
                     projectImages[selectedProject.image as keyof typeof projectImages] ||
@@ -461,7 +461,7 @@ const Portfolio = () => {
                   className="absolute inset-0"
                   style={{
                     background:
-                      "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%)",
+                      "linear-gradient(to top, rgba(var(--black-rgb), 0.85) 0%, transparent 60%)",
                   }}
                 />
                 <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-2 text-white">
@@ -479,7 +479,7 @@ const Portfolio = () => {
                       {selectedProject.title}
                     </h3>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-200">
+                  <div className="flex items-center gap-2 text-sm" style={{ color: "var(--light-silver-color)" }}>
                     <MapPin className="w-4 h-4" style={{ color: "var(--primary-hex)" }} />
                     <span>{selectedProject.location}</span>
                     <span>•</span>

@@ -180,7 +180,10 @@ export default function AboutSection() {
           >
             <div className="absolute -inset-4 bg-gradient-to-r from-primary/10 to-primary/5 rounded-3xl opacity-0 group-hover:opacity-100 blur-lg transition-all duration-700 transform-gpu" />
 
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-gray-300/50 h-full">
+            <div
+              className="relative rounded-3xl overflow-hidden shadow-2xl h-full"
+              style={{ boxShadow: "0 25px 50px -12px rgba(var(--black-rgb), 0.15)" }}
+            >
               <div className="relative h-full min-h-[400px] lg:min-h-full">
                 <img
                   src={AboutImg}

@@ -88,9 +88,10 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+      const isScrolled = window.scrollY > 10;
+      setScrolled((prev) => (prev !== isScrolled ? isScrolled : prev));
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -198,7 +199,8 @@ const Navbar = () => {
                 <img
                   src={logo}
                   alt="Palafox Construction Logo"
-                  className="h-full w-full object-contain p-1 filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.6)]"
+                  className="h-full w-full object-contain p-1 will-change-transform"
+                  style={{ filter: "drop-shadow(0 8px 16px rgba(var(--black-rgb), 0.6))" }}
                 />
               </div>
             </motion.a>
@@ -245,8 +247,13 @@ const Navbar = () => {
                             exit={{ opacity: 0, y: 10, scale: 0.98 }}
                             onMouseEnter={handleMegaMenuMouseEnter}
                             onMouseLeave={handleMegaMenuMouseLeave}
-                            className="absolute left-1/2 transform -translate-x-1/2 xl:left-0 xl:transform-none top-full mt-3 w-[90vw] max-w-[900px] bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-slate-100 p-6 overflow-hidden"
-                            style={{ zIndex: 1000 }}
+                            className="absolute left-1/2 transform -translate-x-1/2 xl:left-0 xl:transform-none top-full mt-3 w-[90vw] max-w-[900px] rounded-3xl border p-6 overflow-hidden"
+                            style={{
+                              background: "var(--card-bg)",
+                              borderColor: "var(--border-color)",
+                              boxShadow: "0 20px 50px rgba(var(--black-rgb), 0.08)",
+                              zIndex: 1000,
+                            }}
                           >
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                               {services.map((service) => {
@@ -270,7 +277,11 @@ const Navbar = () => {
                                     onMouseLeave={() => {
                                       setHoveredService(null);
                                     }}
-                                    className="group block p-6 rounded-2xl border border-border hover:border-primary/40 hover:shadow-xl hover:shadow-primary/[0.08] transition-all duration-300 bg-white"
+                                    className="group block p-6 rounded-2xl border transition-all duration-300"
+                                    style={{
+                                      background: "var(--card-bg)",
+                                      borderColor: "var(--border-color)",
+                                    }}
                                     whileHover={{ y: -4 }}
                                   >
                                     <div className="flex items-start space-x-3 mb-4">
@@ -288,12 +299,15 @@ const Navbar = () => {
                                         <h3
                                           className={`font-bold text-base mb-1 transition-colors ${hoveredService === service.title
                                             ? "text-primary"
-                                            : "text-slate-800 group-hover:text-primary"
+                                            : "text-foreground group-hover:text-primary"
                                             }`}
                                         >
                                           {service.title}
                                         </h3>
-                                        <p className="text-slate-500 text-xs leading-relaxed">
+                                        <p
+                                          className="text-xs leading-relaxed"
+                                          style={{ color: "var(--silver-color)" }}
+                                        >
                                           {service.description}
                                         </p>
                                       </div>
@@ -314,7 +328,7 @@ const Navbar = () => {
                                           <span
                                             className={`truncate transition-colors ${hoveredService === service.title
                                               ? "text-primary"
-                                              : "text-slate-650 group-hover:text-primary"
+                                              : "text-muted-foreground group-hover:text-primary"
                                               }`}
                                           >
                                             {item}
@@ -329,7 +343,7 @@ const Navbar = () => {
                                           key={feature}
                                           className={`px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider rounded-full border transition-colors ${hoveredService === service.title
                                             ? "bg-primary/10 text-primary border-primary/20"
-                                            : "bg-slate-50 text-slate-600 border-slate-200 group-hover:bg-primary/10 group-hover:text-primary group-hover:border-primary/20"
+                                            : "border-border text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary group-hover:border-primary/20"
                                             }`}
                                         >
                                           {feature}

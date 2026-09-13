@@ -82,7 +82,7 @@ const Hero = () => {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(135deg, rgba(16, 42, 58, 0.94) 0%, rgba(10, 26, 36, 0.90) 45%, rgba(8, 126, 168, 0.35) 100%)",
+              "linear-gradient(135deg, rgba(var(--navy-rgb), 0.94) 0%, rgba(var(--navy-rgb), 0.90) 45%, rgba(var(--primary-rgb), 0.35) 100%)",
           }}
         />
 
@@ -276,10 +276,10 @@ const Hero = () => {
               <div
                 className="rounded-3xl border shadow-2xl p-6 sm:p-8 backdrop-blur-xl relative overflow-hidden"
                 style={{
-                  background: "rgba(255, 255, 255, 0.98)",
+                  background: "rgba(var(--white-rgb), 0.98)",
                   borderColor: "var(--border-color)",
                   boxShadow:
-                    "0 25px 60px rgba(5, 5, 5, 0.28), 0 0 40px rgba(var(--primary-rgb), 0.15)",
+                    "0 25px 60px rgba(var(--black-rgb), 0.28), 0 0 40px rgba(var(--primary-rgb), 0.15)",
                 }}
               >
                 {/* Card Header */}

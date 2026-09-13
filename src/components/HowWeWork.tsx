@@ -1,11 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useTransform,
-  useInView,
-} from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import {
   Award,
   MessageSquare,
@@ -65,32 +59,13 @@ const TrustBadge = ({ label, color }: { label: string; color?: string }) => {
 
 const CinematicBackground = () => (
   <div className="absolute inset-0 pointer-events-none overflow-hidden">
-    <motion.div
-      className="absolute top-20 left-20 w-[600px] h-[600px] rounded-full blur-[100px] pointer-events-none"
+    <div
+      className="absolute top-20 left-20 w-[500px] h-[500px] rounded-full blur-[100px] pointer-events-none"
       style={{ background: "rgba(var(--primary-rgb), 0.05)" }}
-      animate={{
-        x: [0, 40, 0],
-        y: [0, -25, 0],
-      }}
-      transition={{
-        duration: 20,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
     />
-    <motion.div
-      className="absolute bottom-20 right-20 w-[600px] h-[600px] rounded-full blur-[100px] pointer-events-none"
+    <div
+      className="absolute bottom-20 right-20 w-[500px] h-[500px] rounded-full blur-[100px] pointer-events-none"
       style={{ background: "rgba(var(--navy-rgb), 0.06)" }}
-      animate={{
-        x: [0, -40, 0],
-        y: [0, 25, 0],
-      }}
-      transition={{
-        duration: 15,
-        repeat: Infinity,
-        ease: "easeInOut",
-        delay: 2,
-      }}
     />
     <div
       className="absolute inset-0 opacity-[0.02]"
@@ -110,48 +85,22 @@ const FeatureCard = ({ feature, index }: { feature: any; index: number }) => {
 
   const FeatureIcon = iconMap[feature.icon] || Award;
 
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const springX = useSpring(x, { stiffness: 150, damping: 15 });
-  const springY = useSpring(y, { stiffness: 150, damping: 15 });
-  const rotateX = useTransform(springY, [-0.5, 0.5], [5, -5]);
-  const rotateY = useTransform(springX, [-0.5, 0.5], [-5, 5]);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    x.set((e.clientX - rect.left) / rect.width - 0.5);
-    y.set((e.clientY - rect.top) / rect.height - 0.5);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    x.set(0);
-    y.set(0);
-  };
-
   return (
     <motion.article
       ref={cardRef}
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{
-        duration: 0.7,
-        delay: index * 0.1,
+        duration: 0.5,
+        delay: index * 0.08,
         ease: [0.16, 1, 0.3, 1],
       }}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={handleMouseLeave}
-      onMouseMove={handleMouseMove}
-      style={{
-        rotateX,
-        rotateY,
-        transformPerspective: 2000,
-      }}
-      className="relative group h-full cursor-pointer"
+      onMouseLeave={() => setIsHovered(false)}
+      className="relative group h-full cursor-pointer transition-transform duration-300 hover:-translate-y-2 transform-gpu"
     >
       <div
-        className="relative h-full overflow-hidden rounded-3xl p-8 flex flex-col transition-all duration-500 shadow-sm hover:shadow-xl"
+        className="relative h-full overflow-hidden rounded-3xl p-8 flex flex-col transition-all duration-300 shadow-sm hover:shadow-xl"
         style={{
           background: "var(--card-bg)",
           border: "1px solid var(--border-color)",
@@ -159,7 +108,7 @@ const FeatureCard = ({ feature, index }: { feature: any; index: number }) => {
       >
         {/* Glow indicator on hover */}
         <div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
           style={{
             background:
               "radial-gradient(circle at center, rgba(var(--primary-rgb), 0.04), transparent 70%)",
@@ -167,18 +116,12 @@ const FeatureCard = ({ feature, index }: { feature: any; index: number }) => {
         />
 
         {/* Accent top line on hover */}
-        <motion.div
-          className="absolute top-0 left-0 right-0 h-[2px]"
+        <div
+          className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           style={{
             background:
               "linear-gradient(90deg, transparent, var(--primary-hex), transparent)",
           }}
-          initial={{ x: "-100%", opacity: 0 }}
-          animate={{
-            x: isHovered ? "100%" : "-100%",
-            opacity: isHovered ? 1 : 0,
-          }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
         />
 
         {/* Icon block */}
@@ -196,18 +139,12 @@ const FeatureCard = ({ feature, index }: { feature: any; index: number }) => {
             />
           </div>
 
-          <motion.div
-            className="absolute -top-1 -right-1"
+          <div
+            className="absolute -top-1 -right-1 opacity-40 group-hover:opacity-100 transition-opacity duration-300"
             style={{ color: "var(--primary-hex)" }}
-            animate={{
-              rotate: isHovered ? 360 : 0,
-              scale: isHovered ? 1.2 : 0.8,
-              opacity: isHovered ? 1 : 0.3,
-            }}
-            transition={{ duration: 0.5 }}
           >
             <Sparkles className="w-4 h-4" />
-          </motion.div>
+          </div>
         </div>
 
         {/* Title */}
@@ -454,7 +391,8 @@ const HowWeWork = () => {
             <div
               className="absolute inset-0 opacity-[0.08]"
               style={{
-                backgroundImage: `linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)`,
+                backgroundImage:
+                  "linear-gradient(rgba(var(--white-rgb), 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(var(--white-rgb), 0.15) 1px, transparent 1px)",
                 backgroundSize: "45px 45px",
               }}
             />
@@ -472,7 +410,14 @@ const HowWeWork = () => {
                     transition={{ duration: 0.6 }}
                     className="inline-block mb-6"
                   >
-                    <span className="px-4 py-2 text-sm font-bold bg-background/10 border border-white/20 rounded-lg text-white backdrop-blur-sm">
+                    <span
+                      className="px-4 py-2 text-sm font-bold border rounded-lg backdrop-blur-sm"
+                      style={{
+                        background: "rgba(var(--white-rgb), 0.1)",
+                        borderColor: "rgba(var(--white-rgb), 0.2)",
+                        color: "var(--white-color)",
+                      }}
+                    >
                       {cta.badge}
                     </span>
                   </motion.div>
@@ -482,7 +427,11 @@ const HowWeWork = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.1 }}
-                    className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.2] tracking-tight text-white [&_span]:text-white"
+                    className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.2] tracking-tight uppercase"
+                    style={{
+                      fontFamily: "var(--font-heading)",
+                      color: "var(--white-color)",
+                    }}
                     dangerouslySetInnerHTML={{ __html: cta.title }}
                   />
 
@@ -491,7 +440,8 @@ const HowWeWork = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="mt-4 text-white font-medium text-lg max-w-lg"
+                    className="mt-4 font-medium text-lg max-w-lg"
+                    style={{ color: "var(--light-silver-color)" }}
                   >
                     {cta.description}
                   </motion.p>
@@ -509,15 +459,21 @@ const HowWeWork = () => {
                         href={button.href}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.98 }}
-                        className={`
-                          px-8 py-3.5 rounded-full font-bold transition-all duration-300 shadow-lg
-                          flex items-center gap-2
-                          ${
-                            button.primary
-                              ? "bg-primary text-dark hover:bg-secondary shadow-[0_10px_40px_rgba(0,0,0,0.3)]"
-                              : "bg-transparent text-white border-2 border-white/20 hover:bg-white/5 backdrop-blur-sm"
-                          }
-                        `}
+                        className="px-8 py-3.5 rounded-full font-bold transition-all duration-300 shadow-lg flex items-center gap-2"
+                        style={{
+                          background: button.primary
+                            ? "var(--primary-hex)"
+                            : "transparent",
+                          color: button.primary
+                            ? "var(--dark-bg)"
+                            : "var(--white-color)",
+                          border: button.primary
+                            ? "none"
+                            : "2px solid rgba(var(--white-rgb), 0.2)",
+                          boxShadow: button.primary
+                            ? "0 10px 40px rgba(var(--primary-rgb), 0.3)"
+                            : "none",
+                        }}
                       >
                         {button.text}
                         <ArrowRight className="w-4 h-4" />
@@ -560,7 +516,10 @@ const HowWeWork = () => {
                       src={vectorimage2}
                       alt={cta.imageAlt || "Palafox Construction"}
                       loading="eager"
-                      className="w-full h-auto object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.4)] will-change-transform transform-gpu"
+                      className="w-full h-auto object-contain will-change-transform transform-gpu"
+                      style={{
+                        filter: "drop-shadow(0 20px 40px rgba(var(--navy-rgb), 0.35))",
+                      }}
                     />
                   </motion.div>
                 </div>
@@ -575,7 +534,14 @@ const HowWeWork = () => {
                   transition={{ duration: 0.6 }}
                   className="inline-block mb-4"
                 >
-                  <span className="px-3 py-1.5 text-xs font-semibold bg-background/20 border border-white/30 rounded-full text-white/90 backdrop-blur-sm">
+                  <span
+                    className="px-3 py-1.5 text-xs font-semibold border rounded-full backdrop-blur-sm"
+                    style={{
+                      background: "rgba(var(--white-rgb), 0.1)",
+                      borderColor: "rgba(var(--white-rgb), 0.2)",
+                      color: "var(--white-color)",
+                    }}
+                  >
                     {cta.badge}
                   </span>
                 </motion.div>
@@ -585,7 +551,11 @@ const HowWeWork = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.1 }}
-                  className="text-3xl sm:text-4xl font-bold leading-[1.2] text-white [&_span]:text-white"
+                  className="text-3xl sm:text-4xl font-bold leading-[1.2] uppercase tracking-tight"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--white-color)",
+                  }}
                   dangerouslySetInnerHTML={{ __html: cta.title }}
                 />
 
@@ -594,7 +564,8 @@ const HowWeWork = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  className="mt-3 text-white font-medium text-base max-w-md mx-auto"
+                  className="mt-3 font-medium text-base max-w-md mx-auto"
+                  style={{ color: "var(--light-silver-color)" }}
                 >
                   {cta.description}
                 </motion.p>
@@ -612,15 +583,18 @@ const HowWeWork = () => {
                       href={button.href}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.98 }}
-                      className={`
-                        px-6 py-3 rounded-full font-bold transition-all duration-300 shadow-lg
-                        flex items-center justify-center gap-2
-                        ${
-                          button.primary
-                            ? "bg-primary text-dark hover:bg-secondary"
-                            : "bg-transparent text-white border-2 border-white/20 hover:bg-white/5"
-                        }
-                      `}
+                      className="px-6 py-3 rounded-full font-bold transition-all duration-300 shadow-lg flex items-center justify-center gap-2"
+                      style={{
+                        background: button.primary
+                          ? "var(--primary-hex)"
+                          : "transparent",
+                        color: button.primary
+                          ? "var(--dark-bg)"
+                          : "var(--white-color)",
+                        border: button.primary
+                          ? "none"
+                          : "2px solid rgba(var(--white-rgb), 0.2)",
+                      }}
                     >
                       {button.text}
                       <ArrowRight className="w-4 h-4" />
@@ -643,7 +617,13 @@ const HowWeWork = () => {
             </div>
 
             {/* Bottom Fade */}
-            <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-black/20 to-transparent pointer-events-none rounded-b-3xl" />
+            <div
+              className="absolute bottom-0 left-0 w-full h-16 pointer-events-none rounded-b-3xl"
+              style={{
+                background:
+                  "linear-gradient(to top, rgba(var(--black-rgb), 0.2), transparent)",
+              }}
+            />
           </div>
         </div>
       </div>

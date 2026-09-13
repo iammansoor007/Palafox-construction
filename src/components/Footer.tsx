@@ -84,7 +84,7 @@ const Footer = () => {
           className="w-full h-full"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)",
+              "linear-gradient(rgba(var(--white-rgb), 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(var(--white-rgb), 0.2) 1px, transparent 1px)",
             backgroundSize: "44px 44px",
           }}
         />
@@ -95,8 +95,8 @@ const Footer = () => {
         <div
           className="py-3 border-b overflow-hidden relative z-10"
           style={{
-            background: "rgba(10, 26, 36, 0.8)",
-            borderColor: "rgba(255, 255, 255, 0.08)",
+            background: "rgba(var(--navy-rgb), 0.8)",
+            borderColor: "rgba(var(--white-rgb), 0.08)",
           }}
         >
           <motion.div
@@ -129,8 +129,8 @@ const Footer = () => {
         <div
           className="border-b relative z-10"
           style={{
-            borderColor: "rgba(255, 255, 255, 0.08)",
-            background: "rgba(16, 42, 58, 0.6)",
+            borderColor: "rgba(var(--white-rgb), 0.08)",
+            background: "rgba(var(--navy-rgb), 0.6)",
           }}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6">
@@ -192,7 +192,7 @@ const Footer = () => {
                   href={emergencyBar.ctaLink}
                   className="inline-flex items-center gap-1.5 px-5 py-3 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider border transition-all duration-300 hover:bg-white/10"
                   style={{
-                    borderColor: "rgba(255, 255, 255, 0.25)",
+                    borderColor: "rgba(var(--white-rgb), 0.25)",
                     color: "var(--white-color)",
                   }}
                 >
@@ -272,8 +272,8 @@ const Footer = () => {
                       aria-label={s.label}
                       className="w-9 h-9 rounded-xl flex items-center justify-center border transition-all duration-300 hover:scale-110"
                       style={{
-                        background: "rgba(255, 255, 255, 0.05)",
-                        borderColor: "rgba(255, 255, 255, 0.12)",
+                        background: "rgba(var(--white-rgb), 0.05)",
+                        borderColor: "rgba(var(--white-rgb), 0.12)",
                         color: "var(--light-silver-color)",
                       }}
                       onMouseEnter={(e) => {
@@ -282,9 +282,9 @@ const Footer = () => {
                         e.currentTarget.style.background = "rgba(var(--primary-rgb), 0.25)";
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.12)";
+                        e.currentTarget.style.borderColor = "rgba(var(--white-rgb), 0.12)";
                         e.currentTarget.style.color = "var(--light-silver-color)";
-                        e.currentTarget.style.background = "rgba(255, 255, 255, 0.05)";
+                        e.currentTarget.style.background = "rgba(var(--white-rgb), 0.05)";
                       }}
                     >
                       <IconComponent className="w-4 h-4" />
@@ -421,7 +421,7 @@ const Footer = () => {
 
                 <div
                   className="pt-3 border-t"
-                  style={{ borderColor: "rgba(255, 255, 255, 0.08)" }}
+                  style={{ borderColor: "rgba(var(--white-rgb), 0.08)" }}
                 >
                   <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider mb-2 text-white">
                     <Clock className="w-3.5 h-3.5" style={{ color: "var(--primary-hex)" }} />
@@ -462,7 +462,7 @@ const Footer = () => {
         {certifications && (
           <div
             className="mt-14 pt-8 border-t grid grid-cols-2 lg:grid-cols-4 gap-4 text-center"
-            style={{ borderColor: "rgba(255, 255, 255, 0.08)" }}
+            style={{ borderColor: "rgba(var(--white-rgb), 0.08)" }}
           >
             {certifications.map((item, idx) => {
               const ItemIcon = iconMap[item.icon] || Award;
@@ -471,8 +471,8 @@ const Footer = () => {
                   key={idx}
                   className="p-4 rounded-2xl border flex flex-col items-center justify-center transition-all duration-300"
                   style={{
-                    background: "rgba(255, 255, 255, 0.03)",
-                    borderColor: "rgba(255, 255, 255, 0.07)",
+                    background: "rgba(var(--white-rgb), 0.03)",
+                    borderColor: "rgba(var(--white-rgb), 0.07)",
                   }}
                 >
                   <ItemIcon className="w-5 h-5 mb-2" style={{ color: "var(--primary-hex)" }} />
@@ -494,7 +494,7 @@ const Footer = () => {
           <div
             className="mt-10 pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-center sm:text-left"
             style={{
-              borderColor: "rgba(255, 255, 255, 0.08)",
+              borderColor: "rgba(var(--white-rgb), 0.08)",
               color: "var(--light-silver-color)",
             }}
           >
@@ -523,8 +523,8 @@ const Footer = () => {
                 onClick={scrollToTop}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border transition-all duration-300 hover:scale-105 cursor-pointer ml-2"
                 style={{
-                  background: "rgba(255, 255, 255, 0.05)",
-                  borderColor: "rgba(255, 255, 255, 0.15)",
+                  background: "rgba(var(--white-rgb), 0.05)",
+                  borderColor: "rgba(var(--white-rgb), 0.15)",
                   color: "var(--white-color)",
                 }}
                 title="Back to Top"

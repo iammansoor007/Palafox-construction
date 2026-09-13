@@ -1,11 +1,6 @@
 import { useRef, useEffect, useState, memo } from "react";
 import {
   motion,
-  useScroll,
-  useTransform,
-  useSpring,
-  useInView,
-  useMotionValue,
   AnimatePresence,
   useReducedMotion
 } from "framer-motion";
@@ -186,186 +181,48 @@ const SubtleBackground = () => (
   </div>
 );
 
-const FloatingParticles = () => (
-  <div className="absolute inset-0 pointer-events-none overflow-hidden">
-    {[...Array(8)].map((_, i) => (
-      <motion.div
-        key={i}
-        className="absolute w-0.5 h-0.5 bg-primary/20 rounded-full"
-        style={{
-          left: `${Math.random() * 100}%`,
-          top: `${Math.random() * 100}%`,
-        }}
-        animate={{
-          y: [0, -30, 0],
-          opacity: [0, 0.2, 0],
-        }}
-        transition={{
-          duration: 6 + Math.random() * 4,
-          repeat: Infinity,
-          delay: Math.random() * 3,
-          ease: "easeInOut"
-        }}
-      />
-    ))}
-  </div>
-);
+const FloatingParticles = () => null;
 
 const AccordionItem = ({ item, index, isOpen, onToggle }: { item: any; index: number; isOpen: boolean; onToggle: (index: number) => void }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const buttonRef = useRef(null);
-
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const springX = useSpring(mouseX, { stiffness: 30, damping: 10 });
-  const springY = useSpring(mouseY, { stiffness: 30, damping: 10 });
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!buttonRef.current) return;
-    const rect = (buttonRef.current as HTMLElement).getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    mouseX.set(50);
-    mouseY.set(50);
-  };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{
-        duration: 0.6,
-        delay: index * 0.1,
-        ease: [0.16, 1, 0.3, 1]
-      }}
-      className="relative group"
-    >
-      <svg className="absolute inset-0 w-full h-full pointer-events-none">
-        <motion.rect
-          x="0"
-          y="0"
-          width="100%"
-          height="100%"
-          fill="url(#liquidGradient)"
-          opacity={isHovered ? 0.08 : 0.03}
-          style={{
-            x: useTransform(springX, [0, 100], [-5, 5]),
-            y: useTransform(springY, [0, 100], [-5, 5]),
-          }}
-          transition={{ duration: 0.3 }}
-        />
-        <defs>
-          <radialGradient id="liquidGradient">
-            <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.2" />
-            <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.05" />
-          </radialGradient>
-        </defs>
-      </svg>
-
-      <motion.div
-        className="absolute -left-8 top-1/2 -translate-y-1/2 hidden lg:block"
-        animate={isHovered ? {
-          x: -5,
-          scale: 1.1,
-          opacity: 0.8
-        } : {
-          x: 0,
-          scale: 1,
-          opacity: 0.4
+    <div className="relative group">
+      {/* Background Watermark Number */}
+      <div
+        className="absolute -left-8 top-1/2 -translate-y-1/2 hidden lg:block select-none pointer-events-none transition-all duration-300"
+        style={{
+          transform: isHovered ? "translate(-4px, -50%) scale(1.05)" : "translate(0px, -50%) scale(1)",
+          opacity: isHovered ? 0.7 : 0.35,
         }}
-        transition={{ duration: 0.3 }}
       >
         <span className={`
           text-[90px] font-black leading-none tracking-tighter
-          ${isOpen ? 'text-primary/15' : 'text-muted-foreground/20'}
-          transition-colors duration-500
+          ${isOpen ? 'text-primary/20' : 'text-muted-foreground/15'}
+          transition-colors duration-300
         `}>
           {String(index + 1).padStart(2, '0')}
         </span>
-      </motion.div>
+      </div>
 
       <div
-        ref={buttonRef}
-        onMouseMove={handleMouseMove}
         onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={handleMouseLeave}
-        className={`
-          relative bg-white rounded-2xl
-          border transition-all duration-500
-          ${isOpen
-            ? 'border-primary/30 shadow-2xl shadow-primary/15'
-            : 'border-primary/10 hover:border-primary/20 shadow-lg shadow-primary/5'
-          }
-        `}
+        onMouseLeave={() => setIsHovered(false)}
+        className="relative rounded-2xl border transition-all duration-300"
+        style={{
+          background: "var(--card-bg)",
+          borderColor: isOpen
+            ? "var(--primary-hex)"
+            : isHovered
+            ? "rgba(var(--primary-rgb), 0.35)"
+            : "var(--border-color)",
+          boxShadow: isOpen
+            ? "0 15px 35px rgba(var(--primary-rgb), 0.12)"
+            : isHovered
+            ? "0 8px 25px rgba(var(--black-rgb), 0.05)"
+            : "none",
+        }}
       >
-        <svg className="absolute inset-0 w-full h-full pointer-events-none">
-          <motion.rect
-            x="2"
-            y="2"
-            width="calc(100% - 4px)"
-            height="calc(100% - 4px)"
-            fill="none"
-            stroke="url(#borderGradient)"
-            strokeWidth="1.2"
-            strokeDasharray="6 6"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={isHovered ? {
-              pathLength: 1,
-              opacity: 0.6
-            } : {
-              pathLength: 0,
-              opacity: 0
-            }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          />
-          <defs>
-            <linearGradient id="borderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="hsl(var(--primary))" />
-              <stop offset="100%" stopColor="hsl(var(--primary)/80)" />
-            </linearGradient>
-          </defs>
-        </svg>
-
-        {isHovered && (
-          <>
-            {[...Array(4)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 rounded-full z-20"
-                style={{
-                  background: i % 2 === 0 ? 'hsl(var(--primary))' : 'hsl(var(--primary)/80)',
-                  boxShadow: `0 0 8px ${i % 2 === 0 ? 'hsl(var(--primary))' : 'hsl(var(--primary)/80)'}`,
-                }}
-                initial={{
-                  x: '50%',
-                  y: '50%',
-                  scale: 0,
-                  opacity: 0.6
-                }}
-                animate={{
-                  x: [`50%`, `${20 + (i * 10)}%`],
-                  y: [`50%`, `${15 + (i * 12)}%`],
-                  scale: [0, 2, 0],
-                  opacity: [0, 0.4, 0]
-                }}
-                transition={{
-                  duration: 2,
-                  delay: i * 0.12,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
-            ))}
-          </>
-        )}
 
         <button
           onClick={() => onToggle(index)}
@@ -516,34 +373,10 @@ const AccordionItem = ({ item, index, isOpen, onToggle }: { item: any; index: nu
           )}
         </AnimatePresence>
 
-        <motion.div
-          className="absolute top-5 left-5 w-6 h-6 border-t-2 border-l-2"
-          animate={isHovered ? {
-            width: 14,
-            height: 14,
-            borderColor: 'hsl(var(--primary)/0.5)'
-          } : {
-            width: 24,
-            height: 24,
-            borderColor: 'hsl(var(--primary)/0.2)'
-          }}
-          transition={{ duration: 0.4 }}
-        />
-        <motion.div
-          className="absolute bottom-5 right-5 w-6 h-6 border-b-2 border-r-2"
-          animate={isHovered ? {
-            width: 14,
-            height: 14,
-            borderColor: 'hsl(var(--primary)/0.5)'
-          } : {
-            width: 24,
-            height: 24,
-            borderColor: 'hsl(var(--primary)/0.2)'
-          }}
-          transition={{ duration: 0.4 }}
-        />
+        <div className="absolute top-5 left-5 w-3 h-3 border-t-2 border-l-2 border-primary/30 pointer-events-none" />
+        <div className="absolute bottom-5 right-5 w-3 h-3 border-b-2 border-r-2 border-primary/30 pointer-events-none" />
       </div>
-    </motion.div>
+    </div>
   );
 };
 
@@ -676,7 +509,7 @@ const KnowledgeCard = () => {
         <div
           className="absolute inset-0 opacity-[0.08]"
           style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(rgba(var(--white-rgb),0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(var(--white-rgb),0.15) 1px, transparent 1px)`,
             backgroundSize: '45px 45px'
           }}
         />
@@ -736,7 +569,7 @@ const KnowledgeCard = () => {
                       px-8 py-3.5 rounded-full font-bold transition-all duration-300 shadow-lg
                       flex items-center gap-2
                       ${button.primary
-                        ? 'bg-primary text-dark hover:bg-secondary shadow-[0_10px_40px_rgba(0,0,0,0.3)]'
+                        ? 'bg-primary text-white hover:bg-secondary shadow-[0_10px_40px_rgba(var(--black-rgb),0.3)]'
                         : 'bg-transparent text-white border-2 border-white/20 hover:bg-white/5 backdrop-blur-sm'
                       }
                     `}
@@ -771,14 +604,16 @@ const KnowledgeCard = () => {
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute bottom-[-33rem] w-[85%] lg:w-[90%]"
-
                 style={{ right: '5%' }}
               >
                 <img
                   src={faqvector}
                   alt="FAQ Support"
                   loading="eager"
-                  className="w-full h-auto object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.4)] will-change-transform transform-gpu"
+                  className="w-full h-auto object-contain will-change-transform transform-gpu"
+                  style={{
+                    filter: "drop-shadow(0 20px 40px rgba(var(--navy-rgb), 0.35))",
+                  }}
                 />
               </motion.div>
             </div>
@@ -834,7 +669,7 @@ const KnowledgeCard = () => {
                     px-6 py-3 rounded-full font-bold transition-all duration-300 shadow-lg
                     flex items-center justify-center gap-2
                     ${button.primary
-                      ? 'bg-primary text-dark hover:bg-secondary'
+                      ? 'bg-primary text-white hover:bg-secondary'
                       : 'bg-transparent text-white border-2 border-white/20 hover:bg-white/5'
                     }
                   `}
@@ -859,7 +694,12 @@ const KnowledgeCard = () => {
         </div>
 
         {/* Bottom Fade */}
-        <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-black/20 to-transparent pointer-events-none rounded-b-3xl" />
+        <div
+          className="absolute bottom-0 left-0 w-full h-16 pointer-events-none rounded-b-3xl"
+          style={{
+            background: "linear-gradient(to top, rgba(var(--black-rgb), 0.2), transparent)",
+          }}
+        />
       </div>
     </div>
   );
@@ -931,7 +771,6 @@ const FAQ = () => {
       className="relative bg-background py-20 md:py-24 lg:py-28 overflow-hidden"
     >
       <SubtleBackground />
-      <FloatingParticles />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16 faq-reveal">
