@@ -181,29 +181,26 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 overflow-visible ${scrolled
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled
           ? "bg-dark/90 backdrop-blur-xl shadow-lg py-3 border-b border-primary/20"
           : "bg-transparent py-3"
           }`}
       >
-        <div className="container mx-auto px-4 lg:px-8 overflow-visible">
-          <div className="flex items-center justify-between overflow-visible">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="flex items-center justify-between">
             <motion.a
               href="#"
-              className="relative w-32 sm:w-40 lg:w-48 h-12 block group overflow-visible"
+              className="flex items-center h-12 sm:h-14 lg:h-16 py-0.5 shrink-0"
               onClick={handleLinkClick}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <div className="absolute left-0 top-1/2 -translate-y-[30%] h-20 w-32 sm:h-24 sm:w-40 lg:h-32 lg:w-46 flex items-center justify-center z-50">
-                <img
-                  src={logo}
-                  alt={(completeData.navbar as any).logoAlt}
-                  decoding="async"
-                  className="h-full w-full object-contain p-1 will-change-transform"
-                  style={{ filter: "drop-shadow(0 8px 16px rgba(var(--black-rgb), 0.6))" }}
-                />
-              </div>
+              <img
+                src={logo}
+                alt={(completeData.navbar as any).logoAlt}
+                decoding="async"
+                className="h-10 sm:h-12 lg:h-14 w-auto object-contain max-w-[220px] sm:max-w-[280px]"
+              />
             </motion.a>
 
             <div className="hidden lg:flex items-center space-x-2">
@@ -472,12 +469,12 @@ const Navbar = () => {
                 <div className="p-6 border-b border-border/50 flex-shrink-0">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                      <div className="h-12 w-36 rounded-xl flex items-center justify-center overflow-hidden">
+                      <div className="h-14 w-44 rounded-xl flex items-center justify-start overflow-hidden">
                         <img
                           src={logo2nd}
                           alt={(completeData.navbar as any).logoAlt}
                           decoding="async"
-                          className="h-full w-full object-contain"
+                          className="h-full w-auto object-contain"
                         />
                       </div>
                     </div>

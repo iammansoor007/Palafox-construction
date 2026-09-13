@@ -73,17 +73,17 @@ const Hero = () => {
           src={roofingBg}
           alt={headlines[0]}
           className="w-full h-full object-cover object-center transform scale-105 transition-transform duration-1000"
-          style={{ opacity: 0.38 }}
+          style={{ opacity: 0.60 }}
           loading="eager"
           decoding="async"
         />
 
-        {/* Deep architectural dark overlays ensuring 100% crisp legibility */}
+        {/* Architectural lighting overlay balancing left-side readability with right-side imagery vibrancy */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(135deg, rgba(var(--navy-rgb), 0.94) 0%, rgba(var(--navy-rgb), 0.90) 45%, rgba(var(--primary-rgb), 0.35) 100%)",
+              "linear-gradient(105deg, rgba(var(--navy-rgb), 0.92) 0%, rgba(var(--navy-rgb), 0.84) 38%, rgba(var(--navy-rgb), 0.50) 68%, rgba(var(--navy-rgb), 0.18) 100%)",
           }}
         />
 
