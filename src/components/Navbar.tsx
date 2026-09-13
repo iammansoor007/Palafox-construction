@@ -22,8 +22,8 @@ import {
   ClipboardCheck,
   Clock,
 } from "lucide-react";
-import logo from "../assets/logoreal.webp";
-import logo2nd from "../assets/logoreal.webp";
+import logo from "../assets/newlogo.png";
+import logo2nd from "../assets/newlogo.png";
 import completeData from "../src/data/completeData.json";
 
 const iconMap = {

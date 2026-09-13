@@ -7,7 +7,7 @@ import {
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import completeData from "../src/data/completeData.json";
-import vectorimage from '../assets/lcverctor.webp'
+import vectorimage from '../assets/pvector.png'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -214,13 +214,13 @@ const AccordionItem = ({ item, index, isOpen, onToggle }: { item: any; index: nu
           borderColor: isOpen
             ? "var(--primary-hex)"
             : isHovered
-            ? "rgba(var(--primary-rgb), 0.35)"
-            : "var(--border-color)",
+              ? "rgba(var(--primary-rgb), 0.35)"
+              : "var(--border-color)",
           boxShadow: isOpen
             ? "0 15px 35px rgba(var(--primary-rgb), 0.12)"
             : isHovered
-            ? "0 8px 25px rgba(var(--black-rgb), 0.05)"
-            : "none",
+              ? "0 8px 25px rgba(var(--black-rgb), 0.05)"
+              : "none",
         }}
       >
 

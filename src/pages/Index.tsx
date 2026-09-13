@@ -4,15 +4,16 @@ import Hero from "@/components/Hero";
 
 // ─── Lazy-loaded sections (each gets its own Suspense boundary
 //     so they appear independently as they load, not all-or-nothing) ───
-const Services       = lazy(() => import("@/components/Services"));
-const TeamValues     = lazy(() => import("@/components/TeamValues"));
-const Portfolio      = lazy(() => import("@/components/Portfolio"));
-const HowWeWork      = lazy(() => import("@/components/HowWeWork"));
-const Testimonials   = lazy(() => import("@/components/Testimonials"));
-const QAForm         = lazy(() => import("@/components/QAForm"));
-const FAQ            = lazy(() => import("@/components/FAQ"));
-const Footer         = lazy(() => import("@/components/Footer"));
-const QuickQuote     = lazy(() => import("@/components/QuickQuote"));
+const Services = lazy(() => import("@/components/Services"));
+const TeamValues = lazy(() => import("@/components/TeamValues"));
+const Portfolio = lazy(() => import("@/components/Portfolio"));
+const HowWeWork = lazy(() => import("@/components/HowWeWork"));
+const Testimonials = lazy(() => import("@/components/Testimonials"));
+const QAForm = lazy(() => import("@/components/QAForm"));
+const FAQ = lazy(() => import("@/components/FAQ"));
+const Footer = lazy(() => import("@/components/Footer"));
+const QuickQuote = lazy(() => import("@/components/QuickQuote"));
+const RoofingExperts = lazy(() => import("@/components/RoofingExperts"))
 
 // Thin shimmer placeholder — keeps layout stable while a section loads
 const SectionSkeleton = memo(() => (
@@ -56,6 +57,12 @@ const Index = () => (
       <section id="hero-section">
         <Hero />
       </section>
+
+
+      <LazySection id="about" className="bg-background">
+        <RoofingExperts />
+      </LazySection>
+
 
       <LazySection id="services" className="bg-background">
         <Services />

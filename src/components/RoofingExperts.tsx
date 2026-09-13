@@ -1,6 +1,6 @@
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef, useEffect, useState, useCallback, useMemo, memo } from "react";
-import AboutImg from "@/assets/lcabout.webp";
+import AboutImg from "@/assets/p3.png";
 import completeData from "../src/data/completeData.json";
 
 const Counter = memo(
@@ -190,6 +190,7 @@ export default function AboutSection() {
                   alt={image.alt}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="eager"
+                  decoding="async"
                   width="800"
                   height="1000"
                 />

@@ -13,7 +13,7 @@ import {
   AlertTriangle,
   Zap,
 } from "lucide-react";
-import roofingBg from "@/assets/roofingbg.webp";
+import roofingBg from "@/assets/p2.png";
 import completeData from "../src/data/completeData.json";
 
 const heroIconMap: Record<string, React.ElementType> = {

@@ -12,7 +12,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import completeData from "../src/data/completeData.json";
-import vectorimage2 from "@/assets/lcverctor.webp";
+import vectorimage2 from "@/assets/pvector.png";
 
 const iconMap: Record<string, React.ElementType> = {
   Award,
@@ -258,11 +258,10 @@ const StatCounter = ({
     >
       <div className="relative inline-block max-w-full">
         <motion.div
-          className={`${
-            value.length > 8
-              ? "text-xl sm:text-2xl md:text-3xl"
-              : "text-4xl md:text-5xl"
-          } font-black relative z-10 whitespace-nowrap`}
+          className={`${value.length > 8
+            ? "text-xl sm:text-2xl md:text-3xl"
+            : "text-4xl md:text-5xl"
+            } font-black relative z-10 whitespace-nowrap`}
           style={{ color: "var(--primary-hex)" }}
           animate={{
             scale: isHovered ? 1.05 : 1,

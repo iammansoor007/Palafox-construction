@@ -6,28 +6,14 @@ import {
   Layout, Building, CheckCircle, Phone, Zap,
 } from "lucide-react";
 import completeData from "../src/data/completeData.json";
-import imgJunkRemoval from "@/assets/junkremovall.jfif";
-import imgConstructionDebris from "@/assets/constrcutiondebrisremoval.jfif";
-import imgDemolitionCleanup from "@/assets/demolitioncleanup.jfif";
-import imgDumpTruck from "@/assets/dumptruckservices.jfif";
-import imgDirtHauling from "@/assets/dirhauling.jfif";
-import imgLandscapeMaterial from "@/assets/landscapematerial.jfif";
-import imgPropertyCleanout from "@/assets/propertycleanout-c.webp";
-import imgContractorHauling from "@/assets/contracterhauling.jfif";
-import imgCommercialJunk from "@/assets/commericaljunkremoval.jfif";
-import imgResidentialJunk from "@/assets/residentaljunkremoval-c.webp";
+import imgRoofing from "@/assets/p1.png";
+import imgConstruction from "@/assets/p2.png";
+import imgRestoration from "@/assets/palafox_roofing_upscaled_2x.jpg";
 
 const serviceImageMap: Record<string, string> = {
-  "01": imgJunkRemoval,
-  "02": imgConstructionDebris,
-  "03": imgDemolitionCleanup,
-  "04": imgDumpTruck,
-  "05": imgDirtHauling,
-  "06": imgLandscapeMaterial,
-  "07": imgPropertyCleanout,
-  "08": imgContractorHauling,
-  "09": imgCommercialJunk,
-  "10": imgResidentialJunk,
+  "01": imgRoofing,
+  "02": imgConstruction,
+  "03": imgRestoration,
 };
 
 const iconMap: Record<string, React.ElementType> = {
